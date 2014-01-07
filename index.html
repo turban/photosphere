@@ -9,7 +9,7 @@
 </head>
 <body>
 	<div id="sphere"></div>
-	<a href="http://thematicmapping.org/" target="top" class="tm">
+	<a href="http://thematicmapping.org/" target="parent" class="tm">
 		<img src="http://thematicmapping.org/img/thematicmapping.png">
 	</a>	
 	<script src="http://threejs.org/build/three.min.js"></script>
@@ -55,7 +55,6 @@
 			renderer.render(scene, camera);
 		}
 
-		// Change field of view
 		function onMouseWheel(event) {
 			if (event.wheelDeltaY) { // WebKit
 				camera.fov -= event.wheelDeltaY * 0.05;
