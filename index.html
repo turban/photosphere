@@ -14,6 +14,7 @@
 	</a>	
 	<script src="http://threejs.org/build/three.min.js"></script>
 	<script src="js/OrbitControls.js"></script>	
+    <script src="js/DeviceOrientationControls.js"></script> 
 	<script src="js/Detector.js"></script>		
 	<script>
 
@@ -39,18 +40,24 @@
 		sphere.scale.x = -1;
 		scene.add(sphere);
 
-		var controls = new THREE.OrbitControls(camera);
-		controls.noPan = true;
-		controls.noZoom = true; 
-		controls.autoRotate = true;
-		controls.autoRotateSpeed = 0.5;
+        var controls;
+        if (typeof window.DeviceOrientationEvent != "undefined") {
+            controls = new THREE.DeviceOrientationControls(camera);
+            controls.connect();
+        } else {
+            controls = new THREE.OrbitControls(camera);
+            controls.noPan = true;
+            controls.noZoom = true; 
+            controls.autoRotate = true;
+            controls.autoRotateSpeed = 0.5;
+        }
 
 		webglEl.appendChild(renderer.domElement);
 
 		render();
 
 		function render() {
-			controls.update();
+            controls.update();
 			requestAnimationFrame(render);
 			renderer.render(scene, camera);
 		}
@@ -72,7 +79,6 @@
 
 		document.addEventListener('mousewheel', onMouseWheel, false);
 		document.addEventListener('DOMMouseScroll', onMouseWheel, false);
-
 	</script>
 </body>
 </html>
